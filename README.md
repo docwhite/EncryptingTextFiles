@@ -7,8 +7,55 @@ I will explain a little bit the workflow to get this thing working properly. Con
 1. Clone this project to your git repos folder or if you are not familiarized with git just download the files as a ZIP.
 2. Uncompress the files to your home directory and navigate to the uncompressed folder.
 ```
-cd ~/encryptingTextFiles-master/
+Ramon$ cd ~/encryptingTextFiles-master/
 ```
 ## Usage
 We will have 2 executables, 2 binaries. One called **encode** and another one called **decode**. Pretty self-explanatory. Both will accept some arguments when executing them, this additional arguments will be the name of the text files we want to work with (input.txt and output.txt, or source.txt and destination.txt) and a keyword to decode or encode, let me explain it later.
-
+1. Start by running the make command (I included a Makefile which does all the compilation work for
+   us). If you dive inside the **Makefile** you will see that once you type the *make* command it will
+create an empty text file called **phrase.txt** which will be the place where you will have to write
+the word you want to encrypt to. You will get the two binaries as well ready to be executed,
+**encode** and **decode**.
+```
+# The flag -s stands for silent. That way you don't see all the commands printed out.
+Ramon$ make -s
+```
+2. Try to list all the elements we have now.
+```
+Ramon$ ls
+decode decode.c encode encode.c Makefile phrase.txt
+```
+3. Now let's write the word or phrase we want to encrypt into the **phrase.txt** file:
+```
+# Write text inside the phrase.txt file (you can do it manually if you want...)
+Ramon$ echo "HHH" > phrase.txt
+# Printing the content inside phrase.txt to our terminal. Just to check.
+Ramon$ cat phrase.txt
+HHH
+```
+4. We run the **encode** binary! We will write something like *./encode <source text file>
+   <destination text file> <keyword>*. If the destination text file does not exist don't worry, it
+will be created automatically. But make sure the source text file you refer to it does exist.
+```
+Ramon$ ./encode phrase.txt encrypted.txt PPP
+# Let's make sure we got an encrypted text file
+Ramon$ ls *txt
+encrypted.txt phrase.txt
+# We got it. Now let's see what the encrypted ASCII character is.
+Ramon$ cat encrypted.txt
++++
+# "+++" is what we get.
+```
+5. If we want to decrypt is the same process but using the **decode** binary.
+```
+# Without the right keyword we won't be able to get what we had before encrypting
+# so if we enter something different than "PPP" we won't get "HHH" back to our
+# DECRYPTED.txt text file.
+Ramon$ ./decode encrypted.txt DECRYPTED.txt PPP
+Ramon$ ls *txt
+encrypted.txt DECRYPTED.txt phrase.txt
+# If we read the DECRYPTED.txt file...
+Ramon$ cat DECRYPTED.txt
+HHH
+```
+6. If you want to clean all the temporary files, text files and binaries, type `make clean -s`
