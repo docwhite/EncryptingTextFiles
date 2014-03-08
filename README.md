@@ -58,4 +58,7 @@ encrypted.txt DECRYPTED.txt phrase.txt
 Ramon$ cat DECRYPTED.txt
 HHH
 ```
-6. If you want to clean all the temporary files, text files and binaries, type `make clean -s`
+6. If you want to clean all the temporary files, text files and binaries, type `make clean -s
+
+<a href="http://imgur.com/UWIxjRv"><img src="http://i.imgur.com/UWIxjRv.jpg?1" title="Hosted by
+imgur.com" /></a>`
