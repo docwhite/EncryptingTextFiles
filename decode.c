@@ -49,10 +49,9 @@ int main(int argc,char *argv[]) /* argument vector 0 - program-name, argv 1 - so
 		/* do something to the read in characters/bytes */ 
 		step1 = letter^argv[3][counter];
 		step2 = ~step1;
-		step2 += 1;
 		step3 = step2>>4;
 		step4 = step2<<4;
-		decoded = step3 + step4;
+		decoded = step3|step4;
 		counter++; /* increase the counter, i.e. step to the next character of the keyword */
 		
 		fputc(decoded,dfp);           /* write the encoded character to the destination file */	
