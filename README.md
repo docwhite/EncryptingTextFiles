@@ -60,8 +60,5 @@ HHH
 ```
 * If you want to clean all the temporary files, text files and binaries, type `make clean -s`
 
-However I have some problems... For instance when I try to code my name `Ramon` using the keyword `Josefina` and try to decode it back, I get completely wrong characters. Non of the examples I wrote work. I am quite frustated. I will create probably another branch inside this git and start experimenting with other methods. If you have any idea please tell me.
-I will attach now an image explaining my approach for decoding. Maybe it is easier to understand... or not, who knows... I created another branch which makes better results than this one, follow this link to see it: https://github.com/docwhite/encryptingTextFiles/tree/thisWorksPartially
-
 <a href="http://imgur.com/UWIxjRv"><img src="http://i.imgur.com/UWIxjRv.jpg?1" title="Hosted by
 imgur.com" /></a>`
