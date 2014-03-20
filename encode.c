@@ -24,7 +24,8 @@
 int main(int argc,char *argv[]) /* argument vector 0 - program-name, argv 1 - source string, argv 2 - dest string, argv 3 - key string */
 {
 	int counter; /* a counter variable for counting through the characters of the password */
-	char letter,lo,hi,rev,inv,enc; /* variables used for the letters of the text during the coding process */
+	int input;
+	unsigned char letter,lo,hi,rev,inv,enc; /* variables used for the letters of the text during the coding process */
 	FILE *sfp=NULL; /* source file pointer */
 	FILE *dfp=NULL; /* destination file pointer */
 
@@ -42,10 +43,11 @@ int main(int argc,char *argv[]) /* argument vector 0 - program-name, argv 1 - so
 	}
 	
 	counter=0; /* set the keyword character counter to 0 */
-	while((letter=fgetc(sfp))!=EOF) /* process the source file by reading in the next letter (as 1 character/byte each) until the file ends, i.e. the EOF (end of file) character is read in */
+	while((input=fgetc(sfp))!=EOF) /* process the source file by reading in the next letter (as 1 character/byte each) until the file ends, i.e. the EOF (end of file) character is read in */
 	{
 		if(counter==strlen(argv[3])) counter=0; /* reset if the keyword overflows, i.e. if its end (string length) is reached */
 		
+		letter=(unsigned char)input;
 		/* do something to the read in characters/bytes */ 
 		lo=letter<<4;
 		hi=letter>>4;
@@ -56,6 +58,7 @@ int main(int argc,char *argv[]) /* argument vector 0 - program-name, argv 1 - so
 		counter++; /* increase the counter, i.e. step to the next character of the keyword */
 		
 		fputc(enc,dfp);           /* write the encoded character to the destination file */	
+		fputc(enc,stdout);
 	}
 	
 	fclose(sfp); /* close file sfp */

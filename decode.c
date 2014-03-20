@@ -24,7 +24,8 @@
 int main(int argc,char *argv[]) /* argument vector 0 - program-name, argv 1 - source string, argv 2 - dest string, argv 3 - key string */
 {
 	int counter; /* a counter variable for counting through the characters of the password */
-	char letter,step1,step2,step3,step4,decoded; /* variables used for the letters of the text during the coding process */
+	int input;
+	unsigned char letter,step1,step2,step3,step4,decoded; /* variables used for the letters of the text during the coding process */
 	FILE *sfp=NULL; /* source file pointer */
 	FILE *dfp=NULL; /* destination file pointer */
 
@@ -42,17 +43,27 @@ int main(int argc,char *argv[]) /* argument vector 0 - program-name, argv 1 - so
 	}
 		
 	counter=0; /* set the keyword character counter to 0 */
-	while((letter=fgetc(sfp))!=EOF) /* process the source file by reading in the next letter (as 1 character/byte each) until the file ends, i.e. the EOF (end of file) character is read in */
+	while((input=fgetc(sfp))!=EOF) /* process the source file by reading in the next letter (as 1 character/byte each) until the file ends, i.e. the EOF (end of file) character is read in */
 	{
 		if(counter==strlen(argv[3])) counter=0; /* reset if the keyword overflows, i.e. if its end (string length) is reached */
 		if(argc==1){PUSAGE;return EXIT_FAILURE;}
 		/* do something to the read in characters/bytes */ 
+		/*step1 = letter^argv[3][counter];
+		step2 = ~step1;
+		step2 += 1;
+		step3 = step2>>4;
+		step4 = step2<<4;
+		decoded = step3 + step4;*/
+		letter=(unsigned char) input;
 		step1 = letter^argv[3][counter];
 		step2 = ~step1;
 		step3 = step2>>4;
 		step4 = step2<<4;
-		decoded = step3|step4;
+		decoded = step3 | step4;
+		
+		
 		counter++; /* increase the counter, i.e. step to the next character of the keyword */
+
 		
 		fputc(decoded,dfp);           /* write the encoded character to the destination file */	
 	}
